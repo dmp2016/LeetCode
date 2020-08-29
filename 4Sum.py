@@ -1,5 +1,6 @@
 from bisect import bisect_left, bisect_right
 
+
 class Solution(object):
     def fourSum(self, nums, target):
         """
@@ -19,7 +20,7 @@ class Solution(object):
         res = set()
         for ind1 in range(ind_a_min, ind_a_max):
             a = nums[ind1]
-            ind_b_min = bisect_left(nums, target -a - nums[-1] - nums[-2], ind1 + 1, len(nums) - 3)
+            ind_b_min = bisect_left(nums, target - a - nums[-1] - nums[-2], ind1 + 1, len(nums) - 3)
             nums3 = [nums[ind] + nums[ind + 1] + nums[ind + 2] for ind in range(0, len(nums) - 2)]
             ind_b_max = bisect_right(nums3, target - a, ind1 + 1, len(nums3))
             for ind2 in range(ind_b_min, ind_b_max):
@@ -35,8 +36,9 @@ class Solution(object):
         res = set(res)
         return list(res)
 
+
 test = Solution()
-A = [-1,0,-5,-2,-2,-4,0,1,-2]
+A = [-1, 0, -5, -2, -2, -4, 0, 1, -2]
 target = -9
 res = test.fourSum(A, target)
 print(res)
