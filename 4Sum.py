@@ -31,8 +31,8 @@ class Solution(object):
                 for ind3 in range(ind_c_min, ind_c_max):
                     c = nums[ind3]
                     d_ind = bisect_left(nums, target - a - b - c, ind3 + 1)
-                    if d_ind < len(nums) and nums[d_ind] == target -a - b - c:
-                        res.add((a, b, c , nums[d_ind]))
+                    if d_ind < len(nums) and nums[d_ind] == target - a - b - c:
+                        res.add((a, b, c, nums[d_ind]))
         res = set(res)
         return list(res)
 
