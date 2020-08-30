@@ -6,7 +6,7 @@ class Solution:
 
     def fourSumCount(self, A: List[int], B: List[int], C: List[int], D: List[int]) -> int:
         d2 = Counter([-c - d for c in C for d in D])
-        return sum([d2.get(a + b, 0) for a in A for b in B])
+        return sum((d2.get(a + b, 0) for a in A for b in B))
 
 
 test = Solution()
