@@ -13,4 +13,4 @@ class Solution:
 
 test = Solution()
 print(test.repeatedNTimes([1, 2, 3, 3]))
-print(test.repeatedNTimes([5,1,5,2,5,3,5,4]))
+print(test.repeatedNTimes([5, 1, 5, 2, 5, 3, 5, 4]))
