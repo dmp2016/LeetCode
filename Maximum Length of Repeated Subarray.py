@@ -1,26 +1,45 @@
-import numpy as np
 from typing import List, Iterator
+
+# Fastest
+# class Solution:
+#     def findLength(self, A: List[int], B: List[int]) -> int:
+#         szA, szB = len(A), len(B)
+#         A, B = [200] * len(B) + A, B + [300] * len(A)
+#         res = 0
+#         for i in range(1, len(A)):
+#             ind1, state = 0, False
+#             for j in range(max(szB - i, 0), min(len(A) - i, len(A) - szA + 1)):
+#                 if A[i + j] == B[j] and not state:
+#                     ind1, state = j, True
+#                 if A[i + j] != B[j] and state:
+#                     res, state = max([res, j - ind1]), False
+#             if state:
+#                 res = max([res, len(A) - i - ind1])
+#         return res
 
 
 class Solution:
-    @staticmethod
-    def getlong1(data):
-        ind0, ind1, res = 0, 0, 0
-        state = False
-        for ind0 in range(len(data)):
-            if data[ind0] and not state:
-                ind1, state = ind0, True
-            if not data[ind0] and state:
-                res, state = max([res, ind0 - ind1]), False
-        if state:
-            res = max([res, ind0 - ind1 + 1])
+    def findLength(self, A: List[int], B: List[int]) -> int:
+        szA, szB = len(A), len(B)
+        res = 0
+        for i in range(1, szA + szB):
+            ind1, state = 0, False
+            for j in range(max(szB - i, 0), min(szA + szB - i, szB)):
+                if A[i + j - szB] == B[j] and not state:
+                    ind1, state = j, True
+                if A[i + j - szB] != B[j] and state:
+                    res, state = max([res, j - ind1]), False
+            if state:
+                res = max([res, min(szA + szB - i, szB) - ind1])
         return res
 
-    def findLength(self, A: List[int], B: List[int]) -> int:
-        A, B = [200] * len(B) + A, B + [300] * len(A)
-        res = 0
-        for _ in range(1, len(A)):
-            A = A[1:]
-            B = B[:-1]
-            res = max([res, self.getlong1(np.array(A) == np.array(B))])
-        return res
+
+A = [1, 2, 3, 2, 1]
+B = [3, 2, 1, 4, 7]
+A = [0] * 1000
+B = [0] * 1000
+# A = [0,0,0,0,1]
+# B = [1,0,0,0,0]
+
+test = Solution()
+print(test.findLength(A, B))
