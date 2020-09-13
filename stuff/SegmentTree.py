@@ -1,9 +1,8 @@
 from typing import List
-from bisect import bisect_left
 
 
 class SumTree:
-    def get_val(self, ind1: int, ind2: int):
+    def get_val(self, ind1: int, ind2: int) -> int:
         res = 0
         cur_level = 0
         while ind1 <= ind2:
@@ -20,12 +19,12 @@ class SumTree:
                 ind2 //= 2
         return res
 
-    def change_delta(self, ind, delta):
+    def change_delta(self, ind: int, delta: int):
         for i in range(self.level_cnt):
             self.data[i][ind] += delta
             ind //= 2
 
-    def set_element(self, ind, new_value):
+    def set_element(self, ind: int, new_value: int):
         delta = new_value - self.data[0][ind]
         self.change_delta(ind, delta)
 
@@ -36,7 +35,7 @@ class SumTree:
                 self.data[i][j] = sum([self.data[0][i] for i in range(j * step, j * step + step)])
             step *= 2
 
-    def __init__(self, data):
+    def __init__(self, data: List[int]):
         self.cust_size = 1
         while self.cust_size < len(data):
             self.cust_size *= 2
@@ -53,19 +52,25 @@ class SumTree:
         self.build()
 
 
-class Solution:
-    def countSmaller(self, nums: List[int]) -> List[int]:
-        nums_sorted = nums.copy()
-        nums_sorted.sort()
-        sum_tree = SumTree([1] * len(nums_sorted))
-        res = []
-        for a in nums:
-            ind = bisect_left(nums_sorted, a)
-            res.append(sum_tree.get_val(0, ind - 1))
-            sum_tree.change_delta(ind, -1)
-        return res
+A = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+all_good = True
+test_sum = SumTree(A)
+for i in range(len(A)):
+    for j in range(i, len(A) - 1):
+        a, b = test_sum.get_val(i, j), sum(A[i:j + 1])
+        print(a, b)
+        all_good = all_good and (a == b)
 
+A[0] = 15
+test_sum.set_element(0, 15)
+A[4] = 16
+test_sum.set_element(4, 16)
+A[-1] = 17
+test_sum.set_element(len(A) - 1, 17)
+for i in range(len(A)):
+    for j in range(i, len(A) - 1):
+        a, b = test_sum.get_val(i, j), sum(A[i:j + 1])
+        print(a, b)
+        all_good = all_good and (a == b)
 
-test = Solution()
-nums = [5, 2, 6, 1]
-print(test.countSmaller(nums))
+print('Tests sum:', 'Ok' if all_good else 'Not ok')
