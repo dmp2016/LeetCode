@@ -3,25 +3,25 @@ from collections import Counter
 
 class Solution:
     def numTriplets(self, nums1: List[int], nums2: List[int]) -> int:
+        A = Counter([nums1[i]**2 for i in range(len(nums1))])
+        B = Counter([nums2[i]**2 for i in range(len(nums2))])
         cnt = 0
-        A = dict([(nums1[i]**2, i) for i in range(len(nums1))])
-        B = dict([(nums2[i]**2, i) for i in range(len(nums2))])
         for j in range(len(nums2)):
             for k in range(j + 1, len(nums2)):
-                if nums2[j]*nums2[k] in A:
-                    cnt += 2
-            if nums2[j]*nums2[j] in A:
-                cnt += 1
+                cnt += A.get(nums2[j]*nums2[k], 0)
         for j in range(len(nums1)):
             for k in range(j + 1, len(nums1)):
-                if nums1[j]*nums1[k] in B and B[nums1[j]*nums1[k]] != A.get(nums1[j]*nums1[k]):
-                    cnt += 2
-            if nums1[j]*nums1[j] in B and B[nums1[j]*nums1[j]] != A.get(nums1[j]*nums1[j]):
-                cnt += 1
+                cnt += B.get(nums1[j]*nums1[k], 0)
         return cnt
 
 
 test = Solution()
 nums1 = [1,1]
 nums2 = [1,1,1]
+print(test.numTriplets(nums1, nums2))
+nums1 = [7,4]
+nums2 = [5,2,8,9]
+print(test.numTriplets(nums1, nums2))
+nums1 = [7,7,8,3]
+nums2 = [1,2,9,7]
 print(test.numTriplets(nums1, nums2))
