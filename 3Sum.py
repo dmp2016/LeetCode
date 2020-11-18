@@ -28,7 +28,8 @@ class Solution:
         res = set(res)
         return list(res)
 
+
 test = Solution()
-A = [-1,0,1,2,-1,-4]
+A = [-1, 0, 1, 2, -1, -4]
 res = test.threeSum(A)
 print(res)
