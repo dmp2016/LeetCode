@@ -19,6 +19,7 @@ def print_list(head: ListNode):
     while head is not None:
         print(head.val, end=" ")
         head = head.next
+    print()
 
 
 print_list(array_to_list([1, 3, 8, -9, 10, 4]))
