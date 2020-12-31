@@ -1,12 +1,10 @@
 from typing import List
-from queue import LifoQueue
 
 class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         res = dict()
-        stack = LifoQueue()
+        stack = []
         for num in nums2:
-            stack.
             while stack and stack[-1] < num:
                 res[stack.pop()] = num
             stack.append(num)
