@@ -1,4 +1,3 @@
-from queue import PriorityQueue
 from heapq import heappush, heappop
 from collections import defaultdict
 
@@ -6,18 +5,17 @@ from collections import defaultdict
 class FreqStack:
 
     def __init__(self):
-        self.orderer = PriorityQueue()
+        self.heap = []
         self.elem_nums = defaultdict(int)
         self.stack_cnt = 0
 
     def push(self, x: int) -> None:
         self.stack_cnt += 1
         self.elem_nums[x] += 1
-        elem = (-self.elem_nums[x], -self.stack_cnt, x)
-        self.orderer.put(elem)
+        heappush(self.heap, (-self.elem_nums[x], -self.stack_cnt, x))
 
     def pop(self) -> int:
-        _, _, x = self.orderer.get()
+        _, _, x = heappop(self.heap)
         self.elem_nums[x] -= 1
         return x
 
