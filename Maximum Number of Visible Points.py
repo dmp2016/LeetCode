@@ -1,5 +1,5 @@
 from typing import List
-from math import asin, pow, sqrt, pi
+from math import asin, pow, sqrt, pi, atan2
 from bisect import bisect_right
 import cmath
 
@@ -13,11 +13,11 @@ class Solution:
         points = [point for point in points if point != [0, 0]]
         if not points:
             return cnt0
-        angles = [cmath.polar(complex(point[0], point[1]))[1] for point in points]
+        angles = [atan2(point[0], point[1]) for point in points]
         angles += [2 * pi + pangle for pangle in angles]
         angle = angle * pi / 180
-        angles = [round(10000000000 * pangle) for pangle in angles]
-        angle = round(10000000000 * angle)
+        # angles = [round(10000000000 * pangle) for pangle in angles]
+        # angle = round(10000000000 * angle)
         angles.sort()
         cnt = 0
         for ind in range(len(angles)):
