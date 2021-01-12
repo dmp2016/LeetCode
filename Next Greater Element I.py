@@ -1,5 +1,4 @@
 from typing import List
-<<<<<<< HEAD
 from bisect import bisect_right
 
 
