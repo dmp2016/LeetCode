@@ -1,9 +1,10 @@
 from typing import List
+<<<<<<< HEAD
 from bisect import bisect_right
 
 
 class Solution:
-    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    def nextGreaterElement1(self, nums1: List[int], nums2: List[int]) -> List[int]:
         res = []
         inds = dict([(b, a) for a, b, in enumerate(nums2)])
         nums2.sort()
@@ -11,6 +12,16 @@ class Solution:
             ind = bisect_right(nums2, n)
             res.append(inds[nums2[ind]] if ind < len(nums2) else - 1)
         return res
+
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        res = dict()
+        stack = []
+        for num in nums2:
+            while stack and stack[-1] < num:
+                res[stack.pop()] = num
+            stack.append(num)
+        return [res.get(m, -1) for m in nums1]
+
 
 
 test = Solution()
