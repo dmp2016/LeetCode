@@ -16,7 +16,7 @@ class ListNode:
 
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
-        while head is not None:            
+        while head is not None:
             if head.val is None:
                 return True
             head.val = None
