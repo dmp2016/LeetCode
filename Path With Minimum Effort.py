@@ -35,7 +35,7 @@ class Solution:
             front = new_front
         return (len(self.heights) - 1, len(self.heights[0]) - 1) in checked
 
-
+    #  Slow
     def minimumEffortPath(self, heights: List[List[int]]) -> int:
         self.heights = heights
         left, right = -1, 1000001
@@ -46,6 +46,10 @@ class Solution:
             else:
                 left = mid
         return right
+    
+    # Dijkstra
+    def minimumEffortPath(self, heights: List[List[int]]) -> int:
+        pass
 
 
 test = Solution()
