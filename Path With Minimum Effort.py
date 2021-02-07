@@ -1,5 +1,6 @@
 from typing import List
 import math
+from heapq import heappush, heappop
 
 
 class Solution:
@@ -36,7 +37,7 @@ class Solution:
         return (len(self.heights) - 1, len(self.heights[0]) - 1) in checked
 
     #  Slow
-    def minimumEffortPath(self, heights: List[List[int]]) -> int:
+    def minimumEffortPath1(self, heights: List[List[int]]) -> int:
         self.heights = heights
         left, right = -1, 1000001
         while left < right - 1:
@@ -49,7 +50,24 @@ class Solution:
     
     # Dijkstra
     def minimumEffortPath(self, heights: List[List[int]]) -> int:
-        pass
+        rows = len(heights)
+        cols = len(heights[0])
+        efforts = dict([((i, j), math.inf) for i in range(rows) for j in range(cols)])
+        efforts[(0, 0)] = 0
+        pq = []
+        heappush(pq, (0, (0, 0)))
+        visited = set()
+        while pq:
+            elem = heappop(pq)
+            if elem[1] not in visited:
+                visited.add(elem[1])
+                for shift in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+                    if 0 <= elem[1][0] + shift[0] < rows and 0 <= elem[1][1] + shift[1] < cols:
+                        new_w = max(elem[0], abs(heights[elem[1][0]][elem[1][1]] - heights[elem[1][0] + shift[0]][elem[1][1] + shift[1]]))
+                        if new_w < efforts[(elem[1][0] + shift[0], elem[1][1] + shift[1])]:
+                            efforts[(elem[1][0] + shift[0], elem[1][1] + shift[1])] = new_w
+                            heappush(pq, (new_w, (elem[1][0] + shift[0], elem[1][1] + shift[1])))
+        return efforts[(rows - 1, cols - 1)]
 
 
 test = Solution()
