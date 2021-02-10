@@ -25,7 +25,7 @@ class Solution:
         cur = head
         new_head = head.next
         cur_new = new_head
-        
+
         cur.next = cur_new.next
         cur = cur.next
         while cur:
