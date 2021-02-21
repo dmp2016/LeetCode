@@ -3,10 +3,7 @@ class Solution:
         if X >= Y:
             return X - Y
         else:
-            if Y & 1:
-                return 2 + self.brokenCalc(X, (Y + 1) // 2)
-            else:
-                return 1 + self.brokenCalc(X, Y // 2)
+            return 2 + self.brokenCalc(X, (Y + 1) // 2) if Y & 1 else 1 + self.brokenCalc(X, Y // 2)
 
 
 test = Solution()
