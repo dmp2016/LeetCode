@@ -34,7 +34,6 @@ class Solution:
 
         return max(store_b[0], 0)
 
-
     def maxProfit(self, prices: List[int], fee: int) -> int:
         a = prices[-1]
         b = 0
