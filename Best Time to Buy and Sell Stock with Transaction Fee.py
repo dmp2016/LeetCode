@@ -3,7 +3,7 @@ from typing import List
 
 class Solution:
 
-    def maxProfit(self, prices: List[int], fee: int) -> int:
+    def maxProfit2(self, prices: List[int], fee: int) -> int:
         store_a = dict()
         store_b = dict()
 
@@ -22,6 +22,18 @@ class Solution:
                 return store_b[ind]
 
         return max(do_rec(False, 0), 0)
+
+    def maxProfit1(self, prices: List[int], fee: int) -> int:
+        store_a = [0] * len(prices)
+        store_a[-1] = prices[-1]
+        store_b = [0] * len(prices)
+
+        for ind in range(len(prices) - 2, -1, -1):
+            store_a[ind] = max(prices[ind] + store_b[ind + 1], store_a[ind + 1])
+            store_b[ind] = max(-prices[ind] - fee + store_a[ind + 1], store_b[ind + 1])
+
+        return max(store_b[0], 0)
+
 
     def maxProfit(self, prices: List[int], fee: int) -> int:
         a = prices[-1]
