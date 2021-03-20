@@ -1,6 +1,3 @@
-from collections import defaultdict
-
-
 class UndergroundSystem:
 
     def __init__(self):
@@ -13,9 +10,9 @@ class UndergroundSystem:
     def checkOut(self, id: int, stationName: str, t: int) -> None:
         from_station, t1 = self.data_cards[id]
         if from_station in self.data_time:
-            p = self.data_time[from_station].set_default(stationName, [0, 0])
+            p = self.data_time[from_station].setdefault(stationName, [0, 0])
         else:
-            p = self.data_time[from_station].set_default(stationName, [0, 0])
+            p = self.data_time[from_station].setdefault(stationName, [0, 0])
         p[0] += 1
         p[1] += t - t1
 
@@ -25,6 +22,8 @@ class UndergroundSystem:
         else:
             p = self.data_time[endStation][startStation]
         return p[1] / p[0]
+
+
 
 
 # Your UndergroundSystem object will be instantiated and called as such:
