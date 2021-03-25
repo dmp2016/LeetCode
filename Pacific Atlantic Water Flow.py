@@ -1,5 +1,4 @@
 from typing import List
-from heapq import heapify, heappop
 from collections import deque
 
 
@@ -9,13 +8,11 @@ class Solution:
             return []
         nrow = len(matrix)
         ncol = len(matrix[0])
-        fld = [(matrix[i][j], i, j) for i in range(nrow) for j in range(ncol)]
-        heapify(fld)
+        fld = sorted([(matrix[i][j], i, j) for i in range(nrow) for j in range(ncol)])
         tp = [[0] * ncol for i in range(nrow)]
         visited_all = set()
         q = deque()
-        while fld:
-            elem = heappop(fld)
+        for elem in fld:
             row, col = elem[1], elem[2]
             if (row, col) not in visited_all:
                 q.append((row, col))
