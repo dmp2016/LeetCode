@@ -3,7 +3,8 @@ from collections import deque
 
 
 class Solution:
-    def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:
+    # bfs
+    def pacificAtlantic1(self, matrix: List[List[int]]) -> List[List[int]]:
         if not matrix:
             return []
         nrow = len(matrix)
@@ -42,6 +43,35 @@ class Solution:
                 for row, col in visited:
                     tp[row][col] = stp
                 visited_all.update(visited)
+        return [[i, j] for i in range(nrow) for j in range(ncol) if tp[i][j] == 3]
+
+    # dfs
+    def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:
+        if not matrix:
+            return []
+        nrow = len(matrix)
+        ncol = len(matrix[0])
+        tp = [[-1] * ncol for i in range(nrow)]
+
+        def do_dfs(h_prev, row: int, col: int) -> int:
+            if row < 0 or col < 0:
+                return 1
+            if row == nrow or col == ncol:
+                return 2
+            h = matrix[row][col]
+            if tp[row][col] < 0:
+                tp[row][col] = 0
+                tp[row][col] = do_dfs(h, row + 1, col) | do_dfs(h, row - 1, col) | do_dfs(h, row, col + 1) | do_dfs(h, row, col - 1)
+            if h_prev >= h:
+                return tp[row][col]
+            else:
+                return 0
+
+        for row in range(nrow):
+            for col in range(ncol):
+                if tp[row][col] < 0:
+                    do_dfs(matrix[0][0], 0, 0)
+
         return [[i, j] for i in range(nrow) for j in range(ncol) if tp[i][j] == 3]
 
 
