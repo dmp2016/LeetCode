@@ -6,8 +6,10 @@ class Solution:
     def numSubmatrixSumTarget(self, matrix: List[List[int]], target: int) -> int:
         res = 0
         for col1 in range(len(matrix[0])):
-            for col2 in range(col1 + 1, len(matrix[0]) + 1):
-                rs = [sum(matrix[row][col1:col2]) for row in range(len(matrix))]
+            rs = [0] * len(matrix)
+            for col2 in range(col1, len(matrix[0])):
+                for row in range(len(matrix)):
+                    rs[row] += matrix[row][col2]
                 vs = defaultdict(int)
                 vs[0] = 1
                 s = 0
