@@ -1,6 +1,7 @@
 from typing import List
 from collections import Counter
 
+
 class Solution:
     def numTriplets(self, nums1: List[int], nums2: List[int]) -> int:
         A = Counter([nums1[i]**2 for i in range(len(nums1))])

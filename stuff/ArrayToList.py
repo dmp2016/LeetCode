@@ -22,4 +22,5 @@ def print_list(head: ListNode):
     print()
 
 
-print_list(array_to_list([1, 3, 8, -9, 10, 4]))
+if __name__ == '__main__':
+    print_list(array_to_list([1, 3, 8, -9, 10, 4]))
