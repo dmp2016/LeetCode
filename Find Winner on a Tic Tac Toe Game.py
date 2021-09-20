@@ -40,7 +40,6 @@ class Solution:
         if is_b_win:
             return 'B'
 
-
         is_a_win = True
         is_b_win = True
         for i in range(3):
@@ -55,5 +54,5 @@ class Solution:
             for j in range(3):
                 if field[i][j] == 0:
                     return 'Pending'
-        
+
         return 'Draw'
