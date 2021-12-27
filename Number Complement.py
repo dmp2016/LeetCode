@@ -3,8 +3,7 @@ class Solution:
         a = num
         mask = 1
         while a > 1:
-            mask <<= 1
-            mask |= 1
+            mask = (mask << 1) | 1
             a >>= 1
         return num ^ mask
 
