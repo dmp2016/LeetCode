@@ -19,6 +19,7 @@ class Solution:
 
         return get_max(nums)
 
+
 test = Solution()
 print(test.maxCoins([3, 1, 5, 8]))
 print(test.maxCoins([1, 5]))
