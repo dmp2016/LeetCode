@@ -1,27 +1,24 @@
 from typing import List
+from functools import cache
 
 
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        n = 2 ** (len(s) - 1)
-        res = []
-        for k in range(n):
-            k |= n
-            t = ''
-            item = []
-            for i in range(len(s)):
-                t += s[i]
-                if k & 1:
-                    if t != t[::-1]:
-                        break
-                    else:
-                        item.append(t)
-                        t = ''
-                k >>= 1
-            else:
-                res.append(item)
-        return res
 
+        @cache
+        def do_rec(s: str) -> List[List[str]]:
+            res = set()
+            if s == s[::-1]:
+                res.add((s, ))
+            for i in range(1, len(s)):
+                left = do_rec(s[:i]) 
+                right = do_rec(s[i:])
+                for a in left:
+                    for b in right:
+                        res.add(a + b)
+            return res
+            
+        return list(do_rec(s))
 
 
 test = Solution()
