@@ -8,8 +8,8 @@ class ListNode:
         self.val = val
         self.next = next
 
-class Solution:
 
+class Solution:
     def __init__(self, head: Optional[ListNode]):
         self.numbers = []
         while head:
