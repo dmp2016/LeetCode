@@ -25,19 +25,19 @@ class Solution:
             if head1 and head1 == head2:
                 cnt = 0
                 while True:
+                    cnt += 1
                     head2 = head2.next
                     if head2 == head1:
                         break
-                    cnt += 1
                 break
 
         def check_cycle(head: Optional[ListNode]) -> bool:
             tmp = head
-            for _ in range(cnt + 1):
+            for _ in range(cnt):
                 tmp = tmp.next
             return tmp == head
 
-        left = 0
+        left = -1
         right = 10000
 
         while left < right - 1:
@@ -46,24 +46,10 @@ class Solution:
             for _ in range(mid):
                 tmp = tmp.next
             if check_cycle(tmp):
-                left = mid
-            else:
                 right = mid
+            else:
+                left = mid
         tmp = head
-        for _ in range(mid):
+        for _ in range(right):
             tmp = tmp.next
         return tmp
-
-
-def array_to_list(list: List, pos: int) -> ListNode:
-    item = None
-    for v in list[::-1]:
-        item = ListNode(v, item)
-    return item
-
-
-test = Solution()
-data = array_to_list([1, 2, 3, 4, 5])
-head = data
-head = head.next
-
