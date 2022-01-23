@@ -25,6 +25,20 @@ class Solution:
         return do_rec(n)
 
 
+# Slow
+class Solution1:
+    def winnerSquareGame(self, n: int) -> bool:
+
+        d = [False] * (n + 1)
+
+        for i in range(n + 1):
+            k = 1
+            while i + k * k <= n:
+                d[i + k * k] = d[i + k * k] or not d[i]
+                k += 1
+        return d[n]
+
+
 test = Solution()
 print(test.winnerSquareGame(n=1))
 print(test.winnerSquareGame(n=2))
