@@ -11,17 +11,17 @@ class Solution:
         pt = Counter(p)
         ph = 0
         for c in p:
-            ph += c**5
+            ph += c
         h0 = 0
         for c in s[:len(p) - 1]:
-            h0 += c**5
+            h0 += c
         res = []
         for ind in range(len(s) - len(p) + 1):
-            h0 += s[ind + len(p) - 1]**5
+            h0 += s[ind + len(p) - 1]
             if h0 == ph:
                 if Counter(s[ind:ind + len(p)]) == pt:
                     res.append(ind)
-            h0 -= s[ind]**5
+            h0 -= s[ind]
         return res
 
 
