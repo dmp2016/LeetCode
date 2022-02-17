@@ -4,32 +4,21 @@ from typing import List
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
 
-        dt = {0: set()}
-        for _ in range(500):
-            for a in candidates:
-                r = list(dt.keys())
-                for b in r:
-                    if a + b <= target:
-                        st = False
-                        dt.setdefault(a + b, set()).add((b, a))
+        self.cur = []
+        self.res = []
 
-        cur = [[target]]
-        res = []
-        while True:
-            st = True
-            for t in cur:
-                if t[0] > 0:
-                    for b, a in dt.get(t[0], []):
-                        res.append([b, a] + t[1:])
-                        st = False
-                else:
-                    res.append(t)
-            if st:
-                res = set(tuple(sorted(d[1:])) for d in res)
-                return res
-            else:
-                cur = res
-                res = []
+        def do_rec(from_ind: int, cur_target: int):
+            if cur_target == 0:
+                self.res.append(self.cur.copy())
+            elif cur_target > 0:
+                for ind in range(from_ind, len(candidates)):
+                    a = candidates[ind]
+                    self.cur.append(a)
+                    do_rec(ind, cur_target - a)
+                    self.cur.pop()
+
+        do_rec(0, target)
+        return self.res
 
 
 test = Solution()
