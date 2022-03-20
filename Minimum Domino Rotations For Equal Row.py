@@ -11,7 +11,7 @@ class Solution:
             cnt_both = 0
             cnt_top = 0
             cnt_bot = 0
-            for ind in range(n):                
+            for ind in range(n):
                 if tops[ind] == num and bottoms[ind] == num:
                     cnt_both += 1
                 elif tops[ind] == num:
