@@ -20,13 +20,13 @@ class Solution:
                 return sms[start_ind]
             res = math.inf
             r = 0
-            for i in range(start_ind, n - mn - 1):
-                if nums[i] > 0:
+            for i in range(start_ind, n - mn):
+                if nums[i] > 0 or i == n - mn - 1:
                     r += nums[i]
-                    res = min(res, max(r, do_rec(i + 1, mn - 1)))
-            i = n - mn - 1
-            r += nums[i]
-            res = min(res, max(r, do_rec(i + 1, mn - 1)))
+                    res_new = max(r, do_rec(i + 1, mn - 1))
+                    res = min(res_new, res)
+                    if res_new == r:
+                        break
             return res
 
         return do_rec(0, m - 1)
