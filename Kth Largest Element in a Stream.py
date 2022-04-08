@@ -1,4 +1,5 @@
 from sortedcontainers import SortedList
+from typing import List
 
 
 class KthLargest:
