@@ -13,7 +13,8 @@ class Solution:
                 return 1
 
             r = [(dfs(v), v) for v in ve]
-            r = sorted([elem[0] for elem in r if s[elem[1]] != s[node]], reverse=True)
+            r = sorted([elem[0]
+                       for elem in r if s[elem[1]] != s[node]], reverse=True)
 
             if len(r) >= 2 and r[0] + r[1] + 1 > self.res:
                 self.res = r[0] + r[1] + 1
@@ -26,6 +27,7 @@ class Solution:
 
         dfs(0)
         return self.res
+
 
 test = Solution()
 print(test.longestPath(parent=[-1, 0, 0, 1, 1, 2], s="abacbe"))
