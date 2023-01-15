@@ -24,15 +24,11 @@ class Solution:
                 break
         dm = dict()
         for st in sl:
-            dm[frozenset(st)] = min(st)
+            me = min(st)
+            for elem in st:
+                dm[elem] = me
         
-        res = []
-        for c in baseStr:
-            for key in dm:
-                if c in key:
-                    res.append(dm[key])
-                    break
-        return ''.join(res)
+        return ''.join(map(lambda x: dm[x], baseStr))
 
 
 test = Solution()
