@@ -3,7 +3,7 @@ import random
 
 
 class Solution:
-    def sortArray(self, nums: List[int]) -> List[int]:
+    def sortArray0(self, nums: List[int]) -> List[int]:
 
         def sort_custom(cur_list: List[int]) -> List[int]:
             if not cur_list:
@@ -23,6 +23,26 @@ class Solution:
             return sort_custom(left) + mid + sort_custom(right)
 
         return sort_custom(nums)
+
+
+    def sortArray(self, nums: List[int]) -> List[int]:
+        if len(nums) <= 1:
+            return nums
+
+        sep = len(nums) // 2
+        list1 = self.sortArray(nums[:sep])
+        list2 = self.sortArray(nums[sep:])
+
+        part = []
+        ind1, ind2 = 0, 0
+        while ind1 < len(list1) and ind2 < len(list2):
+            if list1[ind1] < list2[ind2]:
+                part.append(list1[ind1])
+                ind1 += 1
+            else:
+                part.append(list2[ind2])
+                ind2 += 1
+        return part + list1[ind1:] + list2[ind2:]
 
 
 test = Solution()
