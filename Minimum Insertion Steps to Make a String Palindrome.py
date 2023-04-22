@@ -2,7 +2,7 @@ from functools import lru_cache
 
 class Solution:
     def minInsertions(self, s: str) -> int:
-        
+
         @lru_cache(None)
         def do_rec(left: int, right: int) -> int:
             if right - left <= 0:
